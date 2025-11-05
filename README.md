@@ -14,36 +14,34 @@ Built as a compact end-to-end portfolio project demonstrating:
 - Data-quality verification scripts
 - Modular SQL scripts suitable for GitHub presentation
 
----
 
-```mermaid
 erDiagram
     CUSTOMER ||--o{ ORDERS : places
-    ORDERS ||--|{ ORDER_ITEM : contains
-    PRODUCT ||--o{ ORDER_ITEM : appears_in
-    ORDERS ||--o| PAYMENT : is_paid_by
+    ORDERS   ||--|{ ORDER_ITEM : contains
+    PRODUCT  ||--o{ ORDER_ITEM : appears_in
+    ORDERS   ||--o| PAYMENT : is_paid_by
 
     CUSTOMER {
       int customer_id PK
-      nvarchar name
-      nvarchar email
+      string name
+      string email
       date sign_up_date
     }
 
     PRODUCT {
       int product_id PK
-      nvarchar name
-      nvarchar category
-      decimal unit_cost
-      decimal unit_price
-      bit is_active
+      string name
+      string category
+      float unit_cost
+      float unit_price
+      bool is_active
     }
 
     ORDERS {
       int order_id PK
       int customer_id FK
       date order_date
-      nvarchar status
+      string status
     }
 
     ORDER_ITEM {
@@ -51,14 +49,14 @@ erDiagram
       int order_id FK
       int product_id FK
       int quantity
-      decimal unit_price
-      decimal line_subtotal  -- computed column
+      float unit_price
+      float line_subtotal
     }
 
     PAYMENT {
       int payment_id PK
       int order_id FK
-      decimal amount
-      nvarchar method
+      float amount
+      string method
       datetime paid_at
     }
