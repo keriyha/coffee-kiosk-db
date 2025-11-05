@@ -1,7 +1,7 @@
 
 # ☕ Coffee Kiosk Database (SQL Server)
 
-### 📊 Mini Data Warehouse Project for Portfolio — by [Your Name]
+### 📊 Mini Data Warehouse Project by Younan Kadidiatou Voli Lou
 
 A simple but efficient SQL Server database project that models a **coffee kiosk**.  
 It tracks customers, products, orders, and payments while providing analytics views and quality checks.
