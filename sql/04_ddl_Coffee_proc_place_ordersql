@@ -1,0 +1,78 @@
+USE CoffeeKioskDB;
+GO
+
+IF TYPE_ID(N'dbo.CKItems') IS NOT NULL
+    DROP TYPE dbo.CKItems;
+GO
+
+CREATE TYPE dbo.CKItems AS TABLE
+(
+    product_id INT NOT NULL,
+    quantity   INT NOT NULL CHECK (quantity > 0)
+);
+GO
+
+-- Need to come back
+
+CREATE OR ALTER PROCEDURE ck.usp_place_order
+    @customer_email NVARCHAR(200),
+    @items dbo.CKItems READONLY,         -- << use the dbo.CKItems type
+    @status NVARCHAR(20) = 'Completed',
+    @payment_method NVARCHAR(20) = NULL
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    DECLARE @customer_id INT, @order_id INT;
+
+    SELECT @customer_id = customer_id
+    FROM ck.customer
+    WHERE email = @customer_email;
+
+    IF @customer_id IS NULL
+    BEGIN
+        RAISERROR('Unknown customer email.', 16, 1);
+        RETURN;
+    END
+
+    INSERT INTO ck.orders (customer_id, order_date, status)
+    VALUES (@customer_id, CAST(GETDATE() AS date), @status);
+
+    SET @order_id = SCOPE_IDENTITY();
+
+    INSERT INTO ck.order_item (order_id, product_id, quantity, unit_price)
+    SELECT 
+        @order_id, p.product_id, i.quantity, p.unit_price
+    FROM @items i
+    JOIN ck.product p ON p.product_id = i.product_id;
+
+    IF @status = 'Completed' AND @payment_method IS NOT NULL
+    BEGIN
+        INSERT INTO ck.payment (order_id, amount, method)
+        SELECT @order_id, SUM(line_subtotal), @payment_method
+        FROM ck.order_item
+        WHERE order_id = @order_id;
+    END
+
+    SELECT @order_id AS new_order_id;
+END;
+GO
+
+-- come back
+
+DECLARE @items dbo.CKItems;
+INSERT INTO @items (product_id, quantity) VALUES (1,1), (5,1); -- adjust product IDs as needed
+
+EXEC ck.usp_place_order
+     @customer_email = 'dina@example.com',
+     @items          = @items,
+     @status         = 'Completed',
+     @payment_method = 'Card';
+
+-- See what got created
+SELECT TOP 5 o.order_id, o.status, py.amount, py.method, o.order_date
+FROM ck.orders o
+LEFT JOIN ck.payment py ON py.order_id = o.order_id
+ORDER BY o.order_id DESC;
+
+SELECT * FROM ck.order_item WHERE order_id = SCOPE_IDENTITY(); -- if run inline
