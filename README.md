@@ -16,8 +16,6 @@ Built as a compact end-to-end portfolio project demonstrating:
 
 ---
 
-## 🧩 Entity-Relationship Diagram (ERD)
-
 ```mermaid
 erDiagram
     CUSTOMER ||--o{ ORDERS : places
@@ -54,7 +52,7 @@ erDiagram
       int product_id FK
       int quantity
       decimal unit_price
-      decimal line_subtotal (computed)
+      decimal line_subtotal  -- computed column
     }
 
     PAYMENT {
