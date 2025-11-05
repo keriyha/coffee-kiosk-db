@@ -12,7 +12,7 @@ Built as a compact end-to-end portfolio project demonstrating:
 - Computed columns, foreign keys, and data validation
 - Analytics views (daily sales, top products, gross margin)
 - Data-quality verification scripts
-- Modular SQL scripts suitable for GitHub presentation
+
 
 
 erDiagram
