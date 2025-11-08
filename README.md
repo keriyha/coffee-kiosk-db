@@ -27,6 +27,21 @@ Follow these simple steps to install and run the Coffee Kiosk Database project i
 git clone https://github.com/keriyha/coffee-kiosk-db.git
 cd coffee-kiosk-db
 
+### 📂 Step 2: Run the Scripts in Order
+
+1. `01_schema_tables_constraints.sql` – creates the database, schema, tables, primary keys, and indexes.  
+2. `02_seed_data.sql` – inserts sample records into all tables.  
+3. `03_views_analytics.sql` – builds reporting and analytics views.  
+4. `04_procs_usp_place_order.sql` – adds stored procedure for order placement simulation.  
+5. `05_quality_checks.sql` – runs data validation checks to ensure accuracy.  
+6. `06_sample_queries.sql` – explore data with example queries.
+
+### 📊 Step 3: Explore the Data
+
+SELECT TOP 5 * FROM ck.vw_daily_sales ORDER BY order_date DESC;
+SELECT TOP 5 * FROM ck.vw_top_products ORDER BY revenue DESC;
+SELECT * FROM ck.vw_margin ORDER BY gross_margin DESC;
+
 erDiagram
     CUSTOMER ||--o{ ORDERS : places
     ORDERS   ||--|{ ORDER_ITEM : contains
