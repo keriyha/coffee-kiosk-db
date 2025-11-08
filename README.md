@@ -21,16 +21,7 @@ Follow these simple steps to install and run the Coffee Kiosk Database project i
 - Microsoft SQL Server 2019 or later (or Azure SQL)
 - SQL Server Management Studio (SSMS)
 - Basic knowledge of executing `.sql` scripts
-
 ---
-
-⚙️ Step 1: Clone the Repository
-```bash
-git clone https://github.com/keriyha/coffee-kiosk-db.git
-cd coffee-kiosk-db
-
-
-
 erDiagram
     CUSTOMER ||--o{ ORDERS : places
     ORDERS   ||--|{ ORDER_ITEM : contains
