@@ -8,12 +8,12 @@ It simulates a real-world coffee shop’s data environment — tracking customer
 
 ## 🚀 5-Minute Quickstart
 
-### 🧩 Step 1: Clone the Repository
+### 🧩 Step 1 — Clone the Repository
 ```bash
 git clone https://github.com/keriyha/coffee-kiosk-db.git
 cd coffee-kiosk-db
 
-🧱 Step 2: Run SQL Scripts in Order
+🧱 Step 2 — Run SQL Scripts in Order
 
 Open SQL Server Management Studio (SSMS) and execute the scripts in this order:
 
@@ -25,17 +25,19 @@ Open SQL Server Management Studio (SSMS) and execute the scripts in this order:
 
 04_create_views.sql – Create analytical views (ck.vw_daily_sales, ck.vw_top_products, ck.vw_margin)
 
-⚙️ If you see an error such as “Invalid object name 'vw_daily_sales'”, ensure you reference it as ck.vw_daily_sales.
+⚙️ If you see an error such as “Invalid object name 'vw_daily_sales’”, ensure you reference it as ck.vw_daily_sales.
 
-📊 Step 3: Explore the Data
+📊 Step 3 — Explore the Data
+
 Use simple queries to verify that everything is working:
 
 SELECT TOP 5 * FROM ck.vw_daily_sales ORDER BY order_date DESC;
 SELECT TOP 5 * FROM ck.vw_top_products ORDER BY total_revenue DESC;
 SELECT TOP 5 * FROM ck.vw_margin ORDER BY margin DESC;
-![vw_daily_sales](https://github.com/user-attachments/assets/7ebe9ef7-702e-4ffd-8f6f-0ad31cea962e)
-![vw_top_products](https://github.com/user-attachments/assets/4f3db64b-ea78-439d-ae7e-61b019cfc115)
-![vw_margin](https://github.com/user-attachments/assets/138538f8-5934-4156-ace2-441e219a6c8a)
+
+![vw_daily_sales](https://github.com/user-attachments/assets/3cc279d0-aaad-496f-83c6-1f2fcfe3a740)
+![vw_top_products](https://github.com/user-attachments/assets/05b91357-bfc3-4ba0-9bb7-ae69a12009f2)
+![vw_margin](https://github.com/user-attachments/assets/6a8c05fe-c10a-407b-a8f6-e607d223b279)
 
 📈 Dashboard Insights Overview
 
@@ -45,57 +47,66 @@ It contains three connected visuals that together explain sales trends, product 
 1️⃣ Daily Sales Trend
 
 Purpose: Track total revenue over time to identify performance patterns.
-
 Relationship: Sets the time context for other charts — shows when business activity changes.
 
 2️⃣ Top Products by Revenue
 
 Purpose: Identify best-selling products driving revenue.
-
 Relationship: Explains the peaks seen in the sales trend.
 
 3️⃣ Gross Margin by Category
 
 Purpose: Compare profitability across product categories.
-
 Relationship: Completes the story — links revenue and product mix to profitability.
 
-Together, they create a full business view:
+👉 Together they create a full business view:
 When sales occur → What drives them → Where profit is highest.
 
-🎨 Step 4: Power BI Visualization
-Connect Power BI to SQL Server
+🎨 Step 4 — Power BI Visualization
+🔗 Connect Power BI to SQL Server
 
-Home → Get Data → SQL Server
+Accueil → Obtenir des données → SQL Server
 
-Server: localhost 
+Server: localhost
 
 Database: CoffeeKioskDB
 
 Select your ck views and Load
 
-Export Images
+🖼️ Export Images & Dashboard Files
 
 After formatting your visuals:
-File → Export → Export as Image (PNG) and save them to /docs:
+File → Export → Export as Image (PNG) and save them to /docs/screenshots/.
 
-[Coffee_Kiosk_Dashboard.pbix](docs/screenshots/Coffee_Kiosk_Dashboard.pbix)
+📊 Power BI Dashboards
+
+Below are the main visuals created from the Coffee Kiosk database:
+
+🕒 Daily Sales Trend
+
+☕ Top Products by Revenue
+
+📈 Gross Margin by Category
+
+💾 You can also download and explore the full Power BI report:
+Coffee_Kiosk_Dashboard.pbix
 
 🧠 Tools & Technologies
 
-Microsoft SQL Server – Database design and T-SQL queries
+Microsoft SQL Server – Database design & T-SQL queries
 
-Power BI Desktop – Data visualization and insights
+Power BI Desktop – Data visualization & insights
 
-GitHub – Version control and portfolio showcase
+GitHub – Version control & portfolio showcase
 
 coffee-kiosk-db/
 │
 ├── docs/
-│   ├── daily_sales.png
-│   ├── top_products.png
-│   ├── gross_margin.png
-│   └── Coffee_Kiosk_Dashboard.pbix
+│   └── screenshots/
+│       ├── daily_sales.png
+│       ├── top_products.png
+│       ├── gross_margin.png
+│       └── Coffee_Kiosk_Dashboard.pbix
 │
 ├── sql/
 │   ├── 01_create_database.sql
@@ -104,4 +115,13 @@ coffee-kiosk-db/
 │   └── 04_create_views.sql
 │
 └── README.md
+
+💬 Credits & Contact
+
+👤 Younan Kadidatou Voli Lou
+🎓 MBA in Business Analytics | B.S. in Computer Science | Bilingual (EN/FR)
+ | GitHub
+
+© 2025 Younan Kadidatou Voli Lou | Coffee Kiosk DB Project | All Rights Reserved
+
 
