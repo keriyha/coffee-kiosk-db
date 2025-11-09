@@ -33,6 +33,9 @@ Use simple queries to verify that everything is working:
 SELECT TOP 5 * FROM ck.vw_daily_sales ORDER BY order_date DESC;
 SELECT TOP 5 * FROM ck.vw_top_products ORDER BY total_revenue DESC;
 SELECT TOP 5 * FROM ck.vw_margin ORDER BY margin DESC;
+![vw_daily_sales](https://github.com/user-attachments/assets/7ebe9ef7-702e-4ffd-8f6f-0ad31cea962e)
+![vw_top_products](https://github.com/user-attachments/assets/4f3db64b-ea78-439d-ae7e-61b019cfc115)
+![vw_margin](https://github.com/user-attachments/assets/138538f8-5934-4156-ace2-441e219a6c8a)
 
 📈 Dashboard Insights Overview
 
@@ -76,13 +79,7 @@ Export Images
 After formatting your visuals:
 File → Export → Export as Image (PNG) and save them to /docs:
 
-![vw_daily_sales](https://github.com/user-attachments/assets/7ebe9ef7-702e-4ffd-8f6f-0ad31cea962e)
-
-
-![vw_top_products](https://github.com/user-attachments/assets/4f3db64b-ea78-439d-ae7e-61b019cfc115)
-
-
-![vw_margin](https://github.com/user-attachments/assets/138538f8-5934-4156-ace2-441e219a6c8a)
+[Coffee_Kiosk_Dashboard.pbix](docs/screenshots/Coffee_Kiosk_Dashboard.pbix)
 
 🧠 Tools & Technologies
 
