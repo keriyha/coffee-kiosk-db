@@ -1,4 +1,4 @@
-# ☕ Coffee Kiosk Database & Analytics Dashboard
+# ☕ Coffee Kiosk Database & Dashboard
 
 ### 📘 Project Overview
 The **Coffee Kiosk Database** project demonstrates end-to-end data design, modeling, and analysis using **SQL Server** and **Power BI**.  
@@ -76,21 +76,13 @@ Export Images
 After formatting your visuals:
 File → Export → Export as Image (PNG) and save them to /docs:
 
-docs/daily_sales.png
+![vw_daily_sales](https://github.com/user-attachments/assets/7ebe9ef7-702e-4ffd-8f6f-0ad31cea962e)
 
-docs/top_products.png
 
-docs/gross_margin.png
+![vw_top_products](https://github.com/user-attachments/assets/4f3db64b-ea78-439d-ae7e-61b019cfc115)
 
-#### 🕒 Daily Sales Trend
-![Daily Sales Chart](docs/daily_sales.png)
 
-#### ☕ Top Products by Revenue
-![Top Products Chart](docs/top_products.png)
-
-#### 📊 Gross Margin by Category
-![Gross Margin Chart](docs/gross_margin.png)
-
+![vw_margin](https://github.com/user-attachments/assets/138538f8-5934-4156-ace2-441e219a6c8a)
 
 🧠 Tools & Technologies
 
