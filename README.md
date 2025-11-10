@@ -17,13 +17,13 @@ cd coffee-kiosk-db
 
 Open SQL Server Management Studio (SSMS) and execute the scripts in this order:
 
-01_create_database.sql – Create the CoffeeKioskDB database
+01_schema_tables_constraints.sql – Create the CoffeeKioskDB database,ck schema, tables, primary keys, and indexes
 
-02_create_schema_and_tables.sql – Create ck schema, tables, primary keys, and indexes
+02_coffee_seed_data.sql –  Insert sample data for customers, products, stores, and orders
 
-03_insert_seed_data.sql – Insert sample data for customers, products, stores, and orders
+03_view_analytics.sql – Create analytical views (ck.vw_daily_sales, ck.vw_top_products, ck.vw_margin)
 
-04_create_views.sql – Create analytical views (ck.vw_daily_sales, ck.vw_top_products, ck.vw_margin)
+04_coffee_proc_place_oreder.sql 
 
 ⚙️ If you see an error such as “Invalid object name 'vw_daily_sales’”, ensure you reference it as ck.vw_daily_sales.
 
@@ -65,7 +65,7 @@ When sales occur → What drives them → Where profit is highest.
 🎨 Step 4 — Power BI Visualization
 🔗 Connect Power BI to SQL Server
 
-Accueil → Obtenir des données → SQL Server
+Home → SQL Server → Get Data
 
 Server: localhost
 
@@ -109,10 +109,10 @@ coffee-kiosk-db/
 │       └── Coffee_Kiosk_Dashboard.pbix
 │
 ├── sql/
-│   ├── 01_create_database.sql
-│   ├── 02_create_schema_and_tables.sql
-│   ├── 03_insert_seed_data.sql
-│   └── 04_create_views.sql
+│   ├── 01_schema_tables_constraints.sql
+│   ├── 02_coffee_seed_data.sql
+│   ├── 03_view_analytics.sql
+│   └── 04_coffee_proc_place_orders.sql
 │
 └── README.md
 
