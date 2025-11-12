@@ -1,127 +1,213 @@
-# ☕ Coffee Kiosk Database & Dashboard
+☕ CoffeeKiosk — SQL Analytics & Data Quality Project
+A Production-Style SQL System for Orders, Payments, KPIs & Data Validation
 
-### 📘 Project Overview
-The **Coffee Kiosk Database** project demonstrates end-to-end data design, modeling, and analysis using **SQL Server** and **Power BI**.  
-It simulates a real-world coffee shop’s data environment — tracking customers, products, orders, and profitability — to support analytics and business decision-making.
+The CoffeeKiosk project simulates a real point-of-sale system for a coffee shop.
+It includes a complete relational database, data quality checks, analytic views, KPIs, and a stored procedure for placing orders — all built using SQL Server.
 
----
+This project demonstrates real-world skills for SQL Developer, Database Administrator, BI Analyst, and Data Engineer roles.
+🚀 Features
+✅ 1. Full OLTP Database Schema
 
-## 🚀 5-Minute Quickstart
+Customers
 
-### 🧩 Step 1 — Clone the Repository
-```bash
-git clone https://github.com/keriyha/coffee-kiosk-db.git
-cd coffee-kiosk-db
+Products
 
-🧱 Step 2 — Run SQL Scripts in Order
+Orders
 
-Open SQL Server Management Studio (SSMS) and execute the scripts in this order:
+Order Items
 
-01_schema_tables_constraints.sql – Create the CoffeeKioskDB database,ck schema, tables, primary keys, and indexes
+Payments
 
-02_coffee_seed_data.sql –  Insert sample data for customers, products, stores, and orders
+Business rules using:
 
-03_view_analytics.sql – Create analytical views (ck.vw_daily_sales, ck.vw_top_products, ck.vw_margin)
+Primary & foreign keys
 
-04_coffee_proc_place_oreder.sql 
+Check constraints
 
-⚙️ If you see an error such as “Invalid object name 'vw_daily_sales’”, ensure you reference it as ck.vw_daily_sales.
+Identity auto-increment keys
 
-📊 Step 3 — Explore the Data
+Default values
 
-Use simple queries to verify that everything is working:
+Indexes for performance
 
-SELECT TOP 5 * FROM ck.vw_daily_sales ORDER BY order_date DESC;
-SELECT TOP 5 * FROM ck.vw_top_products ORDER BY total_revenue DESC;
-SELECT TOP 5 * FROM ck.vw_margin ORDER BY margin DESC;
+✅ 2. Seed Data for Testing
 
-![vw_daily_sales](https://github.com/user-attachments/assets/3cc279d0-aaad-496f-83c6-1f2fcfe3a740)
-![vw_top_products](https://github.com/user-attachments/assets/05b91357-bfc3-4ba0-9bb7-ae69a12009f2)
-![vw_margin](https://github.com/user-attachments/assets/6a8c05fe-c10a-407b-a8f6-e607d223b279)
+Sample customers, products, and multiple example orders to simulate real operations.
 
-📈 Dashboard Insights Overview
+✅ 3. Analytics Views
 
-The Coffee Kiosk Analytics Dashboard translates SQL data into clear business insights.
-It contains three connected visuals that together explain sales trends, product performance, and profitability.
+Daily Sales
 
-1️⃣ Daily Sales Trend
+Top Products by Revenue & Units
 
-Purpose: Track total revenue over time to identify performance patterns.
-Relationship: Sets the time context for other charts — shows when business activity changes.
+Gross Margin per Product
 
-2️⃣ Top Products by Revenue
+Customer Lifetime Value (LTV)
 
-Purpose: Identify best-selling products driving revenue.
-Relationship: Explains the peaks seen in the sales trend.
+These views support dashboards and reporting tools like Power BI or Tableau.
 
-3️⃣ Gross Margin by Category
+✅ 4. Stored Procedure — usp_place_order
 
-Purpose: Compare profitability across product categories.
-Relationship: Completes the story — links revenue and product mix to profitability.
+A production-style procedure using a Table-Valued Parameter (TVP) for multi-item orders:
 
-👉 Together they create a full business view:
-When sales occur → What drives them → Where profit is highest.
+Validates customer
 
-🎨 Step 4 — Power BI Visualization
-🔗 Connect Power BI to SQL Server
+Inserts order & items
 
-Home → SQL Server → Get Data
+Calculates payment automatically
 
-Server: localhost
+Supports completed or pending orders
 
-Database: CoffeeKioskDB
+Returns the new order ID
 
-Select your ck views and Load
+This is the exact pattern used in enterprise POS systems.
 
-🖼️ Export Images & Dashboard Files
+✅ 5. Automated Data Quality Checks
 
-After formatting your visuals:
-File → Export → Export as Image (PNG) and save them to /docs/screenshots/.
+Checks for:
 
-📊 Power BI Dashboards
+Orphaned records
 
-Below are the main visuals created from the Coffee Kiosk database:
+Negative prices
 
-🕒 Daily Sales Trend
+Orders completed without payment
 
-☕ Top Products by Revenue
+Schema verification
 
-📈 Gross Margin by Category
+Integrity validation
 
-💾 You can also download and explore the full Power BI report:
-Coffee_Kiosk_Dashboard.pbix
+✅ 6. KPI & Validation Views
 
-🧠 Tools & Technologies
+A full monitoring layer for dashboards:
 
-Microsoft SQL Server – Database design & T-SQL queries
+vw_validation_summary (all quality checks in one place)
 
-Power BI Desktop – Data visualization & insights
+vw_kpi_snapshot (quick summary of business KPIs)
 
-GitHub – Version control & portfolio showcase
+vw_kpi_avg_revenue_per_day (daily revenue trends)
 
-coffee-kiosk-db/
-│
-├── docs/
-│   └── screenshots/
-│       ├── daily_sales.png
-│       ├── top_products.png
-│       ├── gross_margin.png
-│       └── Coffee_Kiosk_Dashboard.pbix
-│
-├── sql/
-│   ├── 01_schema_tables_constraints.sql
-│   ├── 02_coffee_seed_data.sql
-│   ├── 03_view_analytics.sql
-│   └── 04_coffee_proc_place_orders.sql
-│
-└── README.md
+📂 Project Structure
+CoffeeKiosk/
+│── 01_ddl_create.sql
+│── 02_seed_data.sql
+│── 03_views.sql
+│── 04_proc_place_order.sql
+│── 05_quality_checks.sql
+│── 06_examples.sql
+│── 05_data_validation_and_kpi.sql
+│── README.md  ← you're here
 
-💬 Credits & Contact
+📊 KPIs Included
+Business KPIs
 
-👤 Younan Kadidatou Voli Lou
-🎓 MBA in Business Analytics | B.S. in Computer Science | Bilingual (EN/FR)
- | GitHub
+Total orders
 
-© 2025 Younan Kadidatou Voli Lou | Coffee Kiosk DB Project | All Rights Reserved
+Total customers
 
+Completed vs pending orders
+
+Daily revenue
+
+Average ticket size
+
+Top-selling products
+
+Gross margin
+
+Customer lifetime value
+
+Data Quality KPIs
+
+Orphan items
+
+Missing payments
+
+Invalid prices
+
+Integrity mismatches
+
+These make the project suitable for monitoring dashboards.
+
+🧪 How to Run
+1. Create the database & tables
+RUN 01_ddl_create.sql
+
+2. Insert sample data
+RUN 02_seed_data.sql
+
+3. Create analytic views
+RUN 03_views.sql
+
+4. Create the order placement procedure
+RUN 04_proc_place_order.sql
+
+5. Run data quality checks
+RUN 05_quality_checks.sql
+
+6. Run KPIs
+RUN 05_data_validation_and_kpi.sql
+
+
+(Optional)
+Import the tables and views into Power BI for visualization.
+
+🎯 Skills Demonstrated
+Database Design
+
+Normalized tables
+
+Schema separation
+
+Constraints & business rules
+
+Index optimization
+
+SQL Development
+
+Stored procedures
+
+Table-valued parameters (TVP)
+
+Computed columns
+
+Joins & aggregations
+
+Views for analytics
+
+Data Engineering / Governance
+
+Data quality validation
+
+Integrity checks
+
+Orphan detection
+
+KPI monitoring
+
+Business Analytics
+
+Revenue KPIs
+
+Margins
+
+Product performance
+
+Customer behavior
+
+📈 Future Enhancements (optional)
+
+Add Power BI dashboard
+
+Add unit tests for procedures
+
+Add triggers for data auditing
+
+Add incremental ETL load scripts
+
+Add star-schema version for analytics
+
+🙌 Author
+
+(Younan Kadidiatou Voli-Lou)
+SQL Developer • Data Analyst • Database Administrator Candidate
 
