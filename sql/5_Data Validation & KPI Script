@@ -1,0 +1,124 @@
+/* 
+ -- CoffeeKiosk - Data Validation & KPI Script
+-- Author: Lou (Master's in Business Intelligence & Data Analytics)
+-- Description: Basic data checks and core business KPIs 
+--              used to validate data before building dashboards.
+
+*/
+
+------------------------------------------------------------
+-- 1. Make sure we are in the right database
+------------------------------------------------------------
+
+
+USE CoffeeKioskDB;
+GO
+
+------------------------------------------------------------
+-- 2. Row counts by table (quick sanity check)
+------------------------------------------------------------
+PRINT '=== ROW COUNTS PER TABLE ===';
+
+SELECT 'ck.customer'   AS table_name, COUNT(*) AS row_count FROM ck.customer
+UNION ALL
+SELECT 'ck.product',   COUNT(*) FROM ck.product
+UNION ALL
+SELECT 'ck.orders',    COUNT(*) FROM ck.orders
+UNION ALL
+SELECT 'ck.order_item',COUNT(*) FROM ck.order_item
+UNION ALL
+SELECT 'ck.payment',   COUNT(*) FROM ck.payment;
+GO
+
+------------------------------------------------------------
+-- 3. Basic data quality checks
+--    (simple, easy to explain in an interview)
+------------------------------------------------------------
+PRINT '=== DATA QUALITY CHECKS ===';
+
+-- 3.1 Orphan items (order_item without a matching order)
+SELECT 
+    'orphan_items_orders' AS check_name,
+    COUNT(*) AS issue_count
+FROM ck.order_item i
+LEFT JOIN ck.orders o ON o.order_id = i.order_id
+WHERE o.order_id IS NULL;
+
+-- 3.2 Orphan items (order_item without a matching product)
+SELECT 
+    'orphan_items_products' AS check_name,
+    COUNT(*) AS issue_count
+FROM ck.order_item i
+LEFT JOIN ck.product p ON p.product_id = i.product_id
+WHERE p.product_id IS NULL;
+
+-- 3.3 Negative or zero unit_price (should not happen)
+SELECT 
+    'bad_unit_price' AS check_name,
+    COUNT(*) AS issue_count
+FROM ck.order_item
+WHERE unit_price <= 0;
+
+-- 3.4 Completed orders without payment (simple integrity check)
+SELECT 
+    'completed_without_payment' AS check_name,
+    COUNT(*) AS issue_count
+FROM ck.orders o
+LEFT JOIN ck.payment py ON py.order_id = o.order_id
+WHERE o.status = 'Completed'
+  AND py.order_id IS NULL;
+GO
+
+------------------------------------------------------------
+-- 4. Simple business KPI snapshot (1 row)
+------------------------------------------------------------
+PRINT '=== KPI SNAPSHOT (BUSINESS) ===';
+
+SELECT 
+    (SELECT COUNT(*) FROM ck.customer)                          AS total_customers,
+    (SELECT COUNT(*) FROM ck.orders)                            AS total_orders,
+    (SELECT COUNT(*) FROM ck.orders WHERE status = 'Completed') AS completed_orders,
+    (SELECT COUNT(*) FROM ck.orders WHERE status = 'Pending')   AS pending_orders,
+    (SELECT COALESCE(SUM(oi.line_subtotal),0)
+     FROM ck.order_item oi
+     JOIN ck.payment py ON py.order_id = oi.order_id)           AS total_revenue,
+    (SELECT COALESCE(AVG(py.amount),0)
+     FROM ck.payment py)                                        AS avg_ticket_size;
+GO
+
+------------------------------------------------------------
+-- 5. Preview analytic views (for dashboards)
+------------------------------------------------------------
+PRINT '=== DAILY SALES (VIEW) ===';
+SELECT * 
+FROM ck.vw_daily_sales
+ORDER BY order_date DESC;
+
+PRINT '=== TOP PRODUCTS (VIEW) ===';
+SELECT TOP 5 * 
+FROM ck.vw_top_products
+ORDER BY revenue DESC;
+
+PRINT '=== MARGIN BY PRODUCT (VIEW) ===';
+SELECT * 
+FROM ck.vw_margin
+ORDER BY gross_margin DESC;
+GO
+
+------------------------------------------------------------
+-- 6. Simple Customer Lifetime Value (LTV)
+--    (sum of paid orders per customer)
+------------------------------------------------------------
+PRINT '=== CUSTOMER LIFETIME VALUE (LTV) ===';
+
+SELECT 
+    c.name,
+    c.email,
+    SUM(oi.line_subtotal) AS lifetime_value
+FROM ck.customer c
+JOIN ck.orders o      ON o.customer_id = c.customer_id
+JOIN ck.payment py    ON py.order_id   = o.order_id
+JOIN ck.order_item oi ON oi.order_id   = o.order_id
+GROUP BY c.name, c.email
+ORDER BY lifetime_value DESC;
+GO
