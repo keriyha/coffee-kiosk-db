@@ -87,6 +87,7 @@ vw_kpi_snapshot (quick summary of business KPIs)
 vw_kpi_avg_revenue_per_day (daily revenue trends)
 
 📂 Project Structure
+
 CoffeeKiosk/
 │── 01_ddl_create.sql
 │── 02_seed_data.sql
