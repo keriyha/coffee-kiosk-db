@@ -1,214 +1,56 @@
-☕ CoffeeKiosk — SQL Analytics & Data Quality Project
-A Production-Style SQL System for Orders, Payments, KPIs & Data Validation
+☕ CoffeeKiosk — SQL Project
 
-The CoffeeKiosk project simulates a real point-of-sale system for a coffee shop.
-It includes a complete relational database, data quality checks, analytic views, KPIs, and a stored procedure for placing orders — all built using SQL Server.
+A simple, real-world SQL Server project that simulates how a small coffee shop runs its orders and payments.
 
-This project demonstrates real-world skills for SQL Developer, Database Administrator, BI Analyst, and Data Engineer roles.
-🚀 Features
-✅ 1. Full OLTP Database Schema
+I built this project to practice clean database design, real POS logic, and business analytics not just queries, but how data actually flows in production.
 
-Customers
+What’s inside
 
-Products
+A full coffee shop database (customers, products, orders, payments)
 
-Orders
+A stored procedure to place multi-item orders like a real POS system
 
-Order Items
+Analytics views for sales, top products, margins, and customer value
 
-Payments
+Data quality checks to catch missing payments, bad prices, or broken data
 
-Business rules using:
+Why this project
 
-Primary & foreign keys
+This project shows how I think about:
 
-Check constraints
+Data integrity (keys, constraints, validations)
 
-Identity auto-increment keys
+Business logic in SQL (not just SELECTs)
 
-Default values
+Analytics readiness (views built for dashboards like Power BI)
 
-Indexes for performance
+Tech used
 
-✅ 2. Seed Data for Testing
+SQL Server
 
-Sample customers, products, and multiple example orders to simulate real operations.
+Stored procedures & TVPs
 
-✅ 3. Analytics Views
+Views for KPIs & reporting
 
-Daily Sales
+Data quality & validation queries
 
-Top Products by Revenue & Units
+How to run
 
-Gross Margin per Product
+Run the table creation script
 
-Customer Lifetime Value (LTV)
+Insert sample data
 
-These views support dashboards and reporting tools like Power BI or Tableau.
+Create views and procedures
 
-✅ 4. Stored Procedure — usp_place_order
+Query KPIs or connect to Power BI
 
-A production-style procedure using a Table-Valued Parameter (TVP) for multi-item orders:
+Use cases
 
-Validates customer
+SQL Developer practice
 
-Inserts order & items
+BI / Analytics portfolio
 
-Calculates payment automatically
+Entry-level DBA or Data Engineer demonstrations
 
-Supports completed or pending orders
-
-Returns the new order ID
-
-This is the exact pattern used in enterprise POS systems.
-
-✅ 5. Automated Data Quality Checks
-
-Checks for:
-
-Orphaned records
-
-Negative prices
-
-Orders completed without payment
-
-Schema verification
-
-Integrity validation
-
-✅ 6. KPI & Validation Views
-
-A full monitoring layer for dashboards:
-
-vw_validation_summary (all quality checks in one place)
-
-vw_kpi_snapshot (quick summary of business KPIs)
-
-vw_kpi_avg_revenue_per_day (daily revenue trends)
-
-📂 Project Structure
-
-CoffeeKiosk/
-│── 01_ddl_create.sql
-│── 02_seed_data.sql
-│── 03_views.sql
-│── 04_proc_place_order.sql
-│── 05_quality_checks.sql
-│── 06_examples.sql
-│── 05_data_validation_and_kpi.sql
-│── README.md  ← you're here
-
-📊 KPIs Included
-Business KPIs
-
-Total orders
-
-Total customers
-
-Completed vs pending orders
-
-Daily revenue
-
-Average ticket size
-
-Top-selling products
-
-Gross margin
-
-Customer lifetime value
-
-Data Quality KPIs
-
-Orphan items
-
-Missing payments
-
-Invalid prices
-
-Integrity mismatches
-
-These make the project suitable for monitoring dashboards.
-
-🧪 How to Run
-1. Create the database & tables
-RUN 01_ddl_create.sql
-
-2. Insert sample data
-RUN 02_seed_data.sql
-
-3. Create analytic views
-RUN 03_views.sql
-
-4. Create the order placement procedure
-RUN 04_proc_place_order.sql
-
-5. Run data quality checks
-RUN 05_quality_checks.sql
-
-6. Run KPIs
-RUN 05_data_validation_and_kpi.sql
-
-
-(Optional)
-Import the tables and views into Power BI for visualization.
-
-🎯 Skills Demonstrated
-Database Design
-
-Normalized tables
-
-Schema separation
-
-Constraints & business rules
-
-Index optimization
-
-SQL Development
-
-Stored procedures
-
-Table-valued parameters (TVP)
-
-Computed columns
-
-Joins & aggregations
-
-Views for analytics
-
-Data Engineering / Governance
-
-Data quality validation
-
-Integrity checks
-
-Orphan detection
-
-KPI monitoring
-
-Business Analytics
-
-Revenue KPIs
-
-Margins
-
-Product performance
-
-Customer behavior
-
-📈 Future Enhancements (optional)
-
-Add Power BI dashboard
-
-Add unit tests for procedures
-
-Add triggers for data auditing
-
-Add incremental ETL load scripts
-
-Add star-schema version for analytics
-
-🙌 Author
-
-(Younan Kadidiatou Voli-Lou)
-SQL Developer • Data Analyst • Database Administrator Candidate
-
+Author
+Younan Kadidiatou Voli-Lou
